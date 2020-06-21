@@ -21,6 +21,7 @@ let EditProducts = (props) => {
 
   const handleChange = (e) => {
     let newFormData = { ...state }
+    console.log(newFormData, props)
 
     let newElement = { ...newFormData[e.target.id] }
     newElement = e.target.value
@@ -75,6 +76,7 @@ let EditProducts = (props) => {
           })
       }
     )
+    console.log("End of upload")
   }
 
   return (

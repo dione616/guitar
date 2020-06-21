@@ -1,7 +1,5 @@
 let initState = {
-  prodData: [
-    { prodData: { title: "title", description: "desc", image: "", price: 155 }, prodId: "293ujSHmZSeP5nbJv1JG" },
-  ],
+  prodData: [{ prodData: { title: "title", description: "desc", image: "", price: 155, id: "293ujSHmZSeP5nbJv1JG" } }],
 }
 
 const productReducer = (state = initState, action) => {
@@ -14,14 +12,19 @@ const productReducer = (state = initState, action) => {
       return state
     case "UPDATE_PRODUCT":
       console.log("UPDATE_PRODUCT", action.newProd)
-      let stateCopy = { ...state }
-      stateCopy.prodData = [...state.prodData]
+      let stateCopy = { ...state, prodData: [...state.prodData] }
       console.log("UPdate pro copy:", stateCopy)
 
       let st = stateCopy.prodData.filter((el) => {
-        return el.prodId !== action.newProd.prodId
+        console.log(el)
+
+        return el.prodData.id !== action.newProd.prodData.id
       })
+      /* st.push(action.newProd) */
+      console.log("stBefore:", st)
       st.push(action.newProd)
+      console.log("stAfter:", st)
+
       /* let neeS = (stateCopy.prodData:)
       console.log("ST:", neeS) */
       let nnn = {}
@@ -41,6 +44,10 @@ const productReducer = (state = initState, action) => {
     case "MORE":
       console.log("MORE", action.products)
       return { ...state, prodData: action.products }
+
+    /*-----------SHOW PRODUCTS-----------*/
+    /*-----------SHOW PRODUCTS-----------*/
+    /*-----------SHOW PRODUCTS-----------*/
 
     case "SHOW":
       console.log("Show reducer", action.products)

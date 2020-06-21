@@ -45,9 +45,8 @@ export const editProduct = (product) => {
               title: product.title,
               description: product.description,
               price: product.price,
-              prodId: product.id,
+              id: product.id,
             },
-            prodId: product.id,
           },
         })
       })

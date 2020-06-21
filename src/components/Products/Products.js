@@ -1,11 +1,8 @@
 import React, { Component } from "react"
-import { firebaseProducts, firebaseLooper } from "../../config/fbConfig"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import AdminLayout from "../../Hoc/AdminLayout"
 import { connect } from "react-redux"
-import { compose } from "redux"
-import firebase from "../../config/fbConfig"
-import { firestoreConnect } from "react-redux-firebase"
+
 import { reduxForm, Field } from "redux-form"
 import { delProd } from "../store/actions/delProdAction"
 import { showProd } from "../store/actions/showProd"
@@ -15,8 +12,9 @@ import { search } from "../store/actions/searchAction"
 
 import { reset } from "../store/actions/reset"
 
-import Card from "./Card"
+import ProductCard from "./ProductCard"
 import { paginate } from "../store/actions/paginate"
+import { showCardAC, addToCardAC } from "../store/actions/CardAction"
 
 class Products extends Component {
   state = {
@@ -26,16 +24,20 @@ class Products extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props)
+
     this.props.showProd()
     this.setState({ isLoading: false, products: this.props.products })
   }
 
+  //delProdFromDB
   submitClick = (e) => {
     console.log(e)
     console.log(this.props.product)
 
     this.props.delProd(e, this.props.product)
   }
+
   showHigherThan = (e) => {
     this.props.showHigher(this.props.products)
   }
@@ -58,6 +60,10 @@ class Products extends Component {
     this.props.search("Fender")
   }
 
+  addToCard = (id) => {
+    this.props.addToCard(id)
+  }
+
   onSubmit = (e) => {
     console.log(e.text)
 
@@ -73,6 +79,8 @@ class Products extends Component {
   render() {
     const { products, productHigher, product, sortProd, search } = this.props
     const { error, handleSubmit, pristine, reset, submitting } = this.props
+
+    console.log(this.props.product)
 
     return (
       <AdminLayout>
@@ -100,9 +108,10 @@ class Products extends Component {
             {product.prodData ? (
               product.prodData.map((product, i) => (
                 <div className="card" key={i}>
-                  <Card
-                    id={product.prodId}
+                  <ProductCard
+                    id={product.prodData.id}
                     click={this.submitClick}
+                    addToCard={this.addToCard}
                     price={product.prodData.price}
                     title={product.prodData.title}
                     description={product.prodData.description}
@@ -127,6 +136,8 @@ class Products extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log("State:", state)
+
   return {
     products: state.firestore.ordered.products,
     productHigher: state.product,
@@ -157,6 +168,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     search: (title) => {
       dispatch(search(title))
+    },
+    addToCard: (id) => {
+      dispatch(addToCardAC(id))
+    },
+    removeFromCard: (e) => {
+      console.log(e)
     },
   }
 }

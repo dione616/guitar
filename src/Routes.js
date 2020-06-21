@@ -5,7 +5,7 @@ import Home from "./components/Home/Home"
 import Products from "./components/Products/Products"
 import AddProducts from "./components/Products/AddProducts"
 import Login from "./components/Login/Login"
-import Dashboard from "./components/admin/Dashboard"
+import Card from "./components/Card/Card"
 import EditProducts from "./components/Products/EditProducts"
 import PrivateRoute from "./components/authRoutes/PrivateRoute"
 import PublicRoute from "./components/authRoutes/PublicRoute"
@@ -15,7 +15,7 @@ const Routes = (props) => {
     <Layout>
       <Switch>
         <PublicRoute {...props} restricted={false} path="/" exact component={Home} />
-        <PrivateRoute {...props} path="/dashboard" exact component={Dashboard} />
+        <PrivateRoute {...props} path="/card" exact component={Card} />
         <PrivateRoute {...props} path="/products" exact component={Products} />
         <PrivateRoute {...props} path="/addproduct" exact component={AddProducts} />
         <PrivateRoute {...props} restricted={true} path="/addproduct/:id" exact component={EditProducts} />

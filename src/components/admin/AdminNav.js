@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import ListItem from "@material-ui/core/ListItem"
 import firebase from "../../config/fbConfig"
 import { connect } from "react-redux"
@@ -16,6 +16,10 @@ class AdminNav extends React.Component {
       title: "Add Product",
       linkTo: "/addproduct",
     },
+    {
+      title: "Card",
+      linkTo: "/card",
+    },
   ]
 
   handleSubmit = (e) => {
@@ -25,9 +29,8 @@ class AdminNav extends React.Component {
   render() {
     return (
       <div className="admin_wrapper">
-        <a className="admin_btn" href="/products">
-          Products
-        </a>
+        <NavLink to="/card">Card</NavLink>
+
         <a className="admin_btn" href="/addproduct">
           Add Product
         </a>

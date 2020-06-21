@@ -92,11 +92,9 @@ header .container .right .bottom {
 }
 
 .flex_container {
-  display: grid;
-  /* flex-wrap: wrap; */
+  display: flex;
+  flex-wrap: wrap;
   padding: 5px;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .container {
@@ -341,6 +339,7 @@ input {
   color: black;
   font-family: "Righteous";
   margin: 5px;
+  max-width: 300px;
 }
 .card_wrapper .card_thmb {
   border: 1px solid #eeeeee;
@@ -349,6 +348,10 @@ input {
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-size: contain !important;
+}
+.wrapp {
+  max-width: 300px;
+  box-sizing: border-box;
 }
 .title_desc {
   display: block;
@@ -385,6 +388,24 @@ input {
   display: flex;
 }
 
+/*-------------------*/
+/* DASHBOARD */
+/*-------------------*/
+.h1 {
+  display: flex;
+}
+.h1 h1 {
+  margin: auto;
+}
+
+.user_dashboard {
+}
+
+/*PRODUCT*/
+
+.product_buttons {
+  display: flex;
+}
 @media all and (max-width: 575.98px) {
   .container {
     width: 90%;

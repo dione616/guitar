@@ -4,16 +4,19 @@ import { storage } from "../../../config/fbConfig"
 export const showProd = () => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     let products = []
+    let prodData
+    let prodId
     const firestore = getFirestore()
     firestore
       .collection("products")
-      .limit(5)
+      .limit(50)
       .get()
       .then((snap) => {
         snap.forEach((doc) => {
-          let prodData = doc.data()
-          let prodId = doc.id
-          products.push({ prodData, prodId })
+          prodData = doc.data()
+          prodData.id = doc.id
+          prodId = doc.id
+          products.push({ prodData })
         })
         dispatch({ type: "SHOW", products })
       })
